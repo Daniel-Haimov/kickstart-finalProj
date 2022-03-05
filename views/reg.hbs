@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Kick Start SignUp</title>
+    <link href='reg.css' rel='stylesheet' type='text/css' />
+</head>
+
+<body style="background-image: url(partials/img105087.jpg);">
+
+    <form id="regForm" class="box" enctype="application/json" action="/reg" method="post">
+        <img src="/logo/logo1.png" alt="Student Association logo" id="salogo" style="margin-left: 7px; height:55px;" />
+
+        <h1>Sign Up</h1>
+        <input id="regID" class="" name="regID" type="text" placeholder="User ID" value="" />
+        <input id="regPw" class="" name="regPw" type="password" placeholder="Password" value="" />
+        <div class="ruleFormDiv">
+            <select id="regType" name="regType" class="fieldInput">
+                <option value="" disabled selected>Select Rule</option>
+                <option value="student" class="ruleInput">Student</option>
+                <option value="staff" class="ruleInput">Staff</option>
+                <option value="admin" class="ruleInput">Admin</option>
+            </select>
+        </div>
+        <input id="regPoint" class="" name="regPoint" type="text" placeholder="point" value="" />
+        <input id="regFname" class="" name="regFname" type="text" placeholder="First name" value="" />
+        <input id="regLname" class="" name="regLname" type="text" placeholder="Last name" value="" />
+        <input id="regEmail" class="" name="regEmail" type="email" placeholder="Email" value="" />
+        <input class="" id="reg_button" type="submit" value="SignUp" />
+    </form>
+    <p style="color:red; font-weight:bold">{{ errMsg }}</p>
+</body>
+
+</html>

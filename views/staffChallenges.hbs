@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Staff - Challenges </title>
+    <link href='/style.css' rel='stylesheet' type='text/css' />
+    <link href='/staff.css' rel='stylesheet' type='text/css' />
+</head>
+
+<body>
+    {{> staffNav}}
+
+    <div id="contentDiv">
+        <div id="studentDisplay">
+            <div id="studentDisplayFormDiv">
+                <form action="/staff/challenges/student" method="post">
+                    <label for="studentIdInput" style="color: black">Student ID</label>
+                    <input class="inputbox" type="text" name="studentIdInput" id="studentIdInput"
+                        placeholder="Enter Student Number" required>
+                    <input class="submitButton" type="submit" value="Search">
+                </form>
+                <p class="errMsg">{{statusMsg}}</p>
+            </div>
+
+            <div id="studentInfo">
+                <h1 style="padding-top: 30px; ">Student Information</h1>
+                <p class="studentInfoText"><span style="color: black">ID: </span>{{studentId}}</p>
+                <p class="studentInfoText"><span style="color: black">Name: </span>{{studentName}}</p>
+                <p class="studentInfoText"><span style="color: black">Points: </span>{{studentPoints}}</p>
+            </div>
+        </div>
+        <div id="dataDiv">
+            <h1 style="padding-top: 30px;">Challenges</h1>
+            <div id="listDiv">
+                {{{ challenges }}}
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

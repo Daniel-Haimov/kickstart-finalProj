@@ -1,0 +1,168 @@
+body {
+    background-color: #ededed;
+    color: #515456;
+}
+
+.eventButton:hover {
+    cursor: grab;
+    background-color: #004f89;
+    opacity: 1;
+}
+
+#wayFinding {
+    margin-top: 0px;
+    height: auto;
+    text-indent: 2em;
+    /*text-align: center;*/
+    line-height: 1.6rem;
+    background-color: #ededed;
+    border-radius: .5rem;
+    border-style: solid;
+    border-width: 0.5px;
+    border-color: #e1e8f2;
+    top: 20vh;
+    background-color: white;
+}
+
+#profileCard {
+    position: fixed;
+    /*width: 40vw;*/
+    text-align: center;
+    font-family: 'Josefin Sans', sans-serif;
+    /*height: 100vh;*/
+    /*border-right: 1px solid rgba(0,0,0,.2);*/
+    /*position: relative;*/
+    width: 35vw;
+    margin: 2%;
+    margin-top: 0px;
+    height: 75vh;
+    text-align: center;
+    line-height: 1.6rem;
+    border-radius: .5rem;
+    border-style: solid;
+    border-width: 0.5px;
+    border-color: #e1e8f2;
+    top: 20vh;
+    left: 4vw;
+    background-color: white;
+    color: black;
+}
+
+#eventsPart{
+    position: fixed;
+    width: 47vw;
+    margin: 2%;
+    margin-top: 0px;
+    height: 75vh;
+    text-indent: 2em;
+    line-height: 1.6rem;
+    background-color: #ededed;
+    top: 20vh;
+    left: 44vw;
+    overflow-y: scroll;
+}
+
+.featuredEvent {
+    display: block;
+}
+
+#registeredContent {
+    margin-top: 0px;
+    height: auto;
+    text-indent: 2em;
+    line-height: 1.6rem;
+    border-radius: .5rem;
+    border-style: solid;
+    border-width: 0.5px;
+    border-color: #e1e8f2;
+    top: 20vh;
+    margin-bottom: 30px;
+    background-color: white;
+    line-height: 1.8rem;
+}
+
+#featuredContent {
+    margin-top: 0px;
+    height: auto;
+    text-indent: 2em;
+    line-height: 1.6rem;
+    border-radius: .5rem;
+    border-style: solid;
+    border-width: 0.5px;
+    border-color: #e1e8f2;
+    top: 20vh;
+    margin-bottom: 30px;
+    background-color: white;
+}
+
+#redeemButton {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+    position: absolute;
+    bottom: 2vh;
+    left: 0px;
+    border-radius: 0px;
+}
+
+#redeemButton:hover{
+    opacity: 0.8;
+}
+
+button {
+    margin: 10px 0px 0 0; 
+}
+
+a {
+    text-decoration: none;
+    font-size: 22px;
+    color: black;
+}
+
+a:hover {
+    opacity: 0.7;
+}
+
+#pointTotal {
+    font-size: 22px;
+}
+
+#userEmail {
+    font-size: 18px;
+}
+
+#userID {
+    font-size: 18px;
+}
+
+#userProgram {
+    font-size: 18px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}

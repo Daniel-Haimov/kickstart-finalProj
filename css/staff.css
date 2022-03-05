@@ -1,0 +1,77 @@
+body {
+}
+
+#contentDiv{
+	text-indent: 50px;
+}
+
+.errMsg {
+    color:red
+}
+/* 
+ *  Staff Events Page
+ */
+
+.staffEventDiv{
+	border-top: 1px solid rgba(0,0,0,.2);
+	border-bottom: 1px solid rgba(0,0,0,0);
+
+}
+
+.staffEventDiv:hover {
+    background-color: #f4f4f4;
+}
+
+.participantDiv {
+    display:none;
+    position: relative;
+    padding-bottom: 0px;
+}
+
+.closeBut {
+    top:5px;
+    right:-5px;
+    font-size: 15px;
+    background-color: white;
+    color:red;
+    text-align: center;
+    border-color: white;
+}
+
+.closeBut:hover {
+    border-color: grey;
+    background-color: white;
+
+}
+
+/* 
+ * Rewards & Challenges
+ */
+
+#studentDisplay {
+
+}
+
+#studentDisplayFormDiv {
+    padding-top: 30px;
+}
+
+#studentInfo {
+
+}
+
+#dataDiv {
+
+}
+
+#listDiv {
+
+}
+
+/* 
+* Staff Rewards Page
+*/
+
+/* 
+* Staff Challenges Page
+*/

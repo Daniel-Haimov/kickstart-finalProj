@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Events Page</title>
+        <link href='/style.css' rel='stylesheet' type='text/css'/>
+        <link href='/staff.css' rel='stylesheet' type='text/css'/>
+</head>
+
+<body>
+    {{> staffNav}}
+
+    <div id="contentDiv">
+        <h1 style="padding-top: 30px; padding-bottom: 50px;">Current Events</h1>
+        {{!-- display events --}}
+        {{!-- event title onclick, display participants --}}
+        {{!-- confirm btn for each participants --}}
+        {{!-- confirm all btn to make the events finished and insert finished_events each participant --}}
+        {{errorMessage}}
+        {{#each events}}<div class="staffEventDiv">
+            <div class="staffEventTitle" onclick="revealPDiv({{this.events_id}});">
+                <h3>{{this.events_title}}<span>&nbsp | &nbsp{{this.events_date}}</span><button style="float: right; margin-right: 40px;" onclick="confirm({{this.events_id}})">confirm</button></h3>
+            </div>
+            <div class = "participantDiv" id="participantDiv{{this.events_id}}">
+                <div style="background-color: #fff; color: 515456" id="participantList{{this.events_id}}">
+                </div>
+            </div>  
+        </div>{{/each}}
+                
+       
+    </div>
+<script>
+    const revealPDiv =  (eventId) => {
+        let pDiv = document.getElementById("participantDiv"+ eventId);
+        let pL = document.getElementById("participantList"+ eventId)
+        fetch(window.location.origin + "/staff/participants/" + eventId)
+        .then(res => res.json())
+        .then(res=>{
+            if (pDiv.style.display != "block") {
+                if (!res.participants.length) {
+                    let li = document.createElement('li'); 
+                    li.innerHTML = "No participant registered..."
+                    li.style.color = "red";
+                    pL.appendChild(li);
+                }
+                for (participant of res.participants){
+                    let li = document.createElement('div');
+                    let name = document.createElement('span');
+                    let sId = document.createElement('span');
+                    let cB = document.createElement('button');
+                    cB.classList.add("closeBut");
+                    cB.innerHTML = "X";
+                    cB.addEventListener('click', () => {
+                            fetch(window.location.origin + "/staff/delete", {
+                                method: "POST", 
+                                headers: {
+                                    "Content-Type": "application/json",
+                                },
+                                body: JSON.stringify({studentId:participant.studentId, eventId: eventId}),
+                            })
+                            .then(res=>res.json())
+                            .then(res=>{
+                                cB.parentNode.parentNode.removeChild(cB.parentNode);
+                            })
+                            .catch(e=>console.log(e));
+                        });
+                    sId.innerHTML = participant.studentId + ' ';
+                    name.innerHTML = participant.studentName + ' ';
+                    li.appendChild(cB);
+                    li.appendChild(sId);
+                    li.appendChild(name);
+                    pL.appendChild(li);
+                }
+                pDiv.style.display = "block";
+            } else {
+                while (pL.firstChild){
+                    pL.removeChild(pL.firstChild);
+                }
+                pDiv.style.display = "none";
+            }
+        }).catch(e=>console.log(e));
+    }
+
+    const confirm = (eventId) => {
+        window.location.replace(window.location.origin + "/staff/finish/" + eventId);
+    }
+
+    const closePDiv = (eventId) => {
+        let pDiv = document.getElementById("participantDiv"+ eventId);
+        let pL = document.getElementById("participantList"+ eventId)
+        while (pL.firstChild){
+            pL.removeChild(pL.firstChild);
+        }
+        pDiv.style.display = "none";
+    }
+</script>
+</body>
+
+</html>
