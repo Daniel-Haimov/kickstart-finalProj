@@ -1,10 +1,3 @@
-// controller for event page goes here
-// TODO: right now the config option is open (i.e. password)
-//  needs to use dotenv to store private information safe
-// TODO2: validation
-// TODO3: stylyze the rendered events
-// TODO4: validation
-
 const mysql = require("mysql");
 
 const fetchUser = (userId) => {

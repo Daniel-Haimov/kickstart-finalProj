@@ -4,7 +4,6 @@
 const express = require('express');
 const router = express.Router();
 const eventConnector = require('../connectors/eventConnector');
-const rewardsConnector = require('../connectors/rewardsConnector');
 
 // "/admin" handlers
 
