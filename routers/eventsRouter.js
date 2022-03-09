@@ -18,34 +18,21 @@ router.get('/', async (request, response) => {
     }
 });
 
-router.post('/join', async (request, response) => {
+router.post('/donate', async (request, response) => {
     try {
         console.log('the event id is ', request.body.value);
         console.log('user is ', request.session.user.users_id);
         event_id = request.body.value;
         user_id = request.session.user.users_id;
+        ammount = request.body.ammount;
 
-        result = await eventConnector.determineJoined(user_id, event_id);
+        result = await eventConnector.donatingEvent(event_id, ammount);
 
         console.log(result);
 
-        if (result.length !== 0) {
-            var isJoined = true;
-            console.log('==================================================================');
-            console.log('the student has enrolled');
-            console.log('==================================================================');
+        //  response.redirect('/main');
+        response.redirect(request.get('referer'));
 
-        } else {
-            var isJoined = false;
-            console.log('==================================================================');
-            console.log('the student is not yet enrolled');
-            console.log('==================================================================');
-        }
-
-        if (isJoined === false) {
-            joining = await eventConnector.joiningEvent(user_id, event_id);
-        }
-        response.redirect('/main');
     }
     catch (err) {
         response.render('events.hbs', "error")

@@ -107,17 +107,17 @@ LOCK TABLES `finished_events` WRITE;
 ;
 INSERT INTO `finished_events`
 VALUES (46, 1, 'A01874296', '2019-03-22'),
-(47, 1, 'A12341234', '2019-03-22'),
-(48, 1, 'A00054504', '2019-03-22'),
-(49, 1, 'A00149041', '2019-03-22'),
-(50, 1, 'A00305816', '2019-03-22'),
-(51, 1, 'A00499736', '2019-03-22'),
-(52, 1, 'A00559613', '2019-03-22'),
-(53, 1, 'A00579625', '2019-03-22'),
-(54, 1, 'A00637097', '2019-03-22'),
-(55, 1, 'A12345678', '2019-03-22'),
-(56, 15, 'A12345678', '2019-03-22'),
-(57, 16, 'A12345678', '2019-03-22');
+  (47, 1, 'A12341234', '2019-03-22'),
+  (48, 1, 'A00054504', '2019-03-22'),
+  (49, 1, 'A00149041', '2019-03-22'),
+  (50, 1, 'A00305816', '2019-03-22'),
+  (51, 1, 'A00499736', '2019-03-22'),
+  (52, 1, 'A00559613', '2019-03-22'),
+  (53, 1, 'A00579625', '2019-03-22'),
+  (54, 1, 'A00637097', '2019-03-22'),
+  (55, 1, 'A12345678', '2019-03-22'),
+  (56, 15, 'A12345678', '2019-03-22'),
+  (57, 16, 'A12345678', '2019-03-22');
 /*!40000 ALTER TABLE `finished_events` ENABLE KEYS */
 ;
 UNLOCK TABLES;
@@ -136,6 +136,7 @@ CREATE TABLE `kickstart_events` (
   `events_goal` int(5) NOT NULL,
   `events_desc` varchar(1000) NOT NULL,
   `events_isFinished` tinyint(1) NOT NULL DEFAULT '0',
+  `events_ammount` int(5) NOT NULL,
   PRIMARY KEY (`events_id`)
 ) ENGINE = InnoDB AUTO_INCREMENT = 46 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */
@@ -152,10 +153,8 @@ VALUES (
     'Kick Start Wayfinding Station',
     '2019-02-02',
     '15:00:00',
-    'SW1 Entrance',
     1000,
     'Get help on your first day at BCIT! Kick Start volunteers will be available to help answer any questions that you may have.',
-    'Burnaby',
     1,
     0
   ),
@@ -164,54 +163,42 @@ VALUES (
     'Kick Start Wayfinding Station',
     '2019-02-02',
     '10:00:00',
-    '11:00:00',
-    '1st Floor Lobby',
     1000,
     'Get help on your first day at BCIT! Kick Start volunteers will be available to help answer any questions that you may have.',
-    'Downtown',
     1,
     0
   ),
-(
+  (
     3,
     'Kick Start Wayfinding Station',
     '2019-02-11',
     '14:00:00',
-    '15:00:00',
-    '1st Floor Atrium',
     1000,
     'Get help on your first day at BCIT! Kick Start volunteers will be available to help answer any questions that you may have.',
-    'Richmond',
     1,
     0
   ),
-(
+  (
     4,
     'Kick Start Wayfinding Station',
     '2019-02-11',
     '13:00:00',
-    '14:00:00',
-    'SW1 Entrance',
     1000,
     'Get help on your first day at BCIT! Kick Start volunteers will be available to help answer any questions that you may have.',
-    'Burnaby',
     1,
     0
   ),
-(
+  (
     5,
     'Kick Start Wayfinding Station',
     '2019-02-20',
     '12:30:00',
-    '13:30:00',
-    '1st Floor Lobby',
     1000,
     'Get help on your first day at BCIT! Kick Start volunteers will be available to help answer any questions that you may have.',
-    'Downtown',
     1,
     0
   ),
-(
+  (
     6,
     'Kick Start Wayfinding Station',
     '2019-02-20',
@@ -224,7 +211,7 @@ VALUES (
     1,
     0
   ),
-(
+  (
     7,
     'Welcome Back Feast',
     '2019-02-21',
@@ -237,7 +224,7 @@ VALUES (
     1,
     0
   ),
-(
+  (
     8,
     'Welcome Back Feast',
     '2019-02-22',
@@ -250,7 +237,7 @@ VALUES (
     1,
     0
   ),
-(
+  (
     9,
     'Welcome Back Feast',
     '2019-02-23',
@@ -263,7 +250,7 @@ VALUES (
     1,
     0
   ),
-(
+  (
     10,
     'Part-Time Studies Wayfinding Station',
     '2019-02-23',
@@ -276,7 +263,7 @@ VALUES (
     1,
     0
   ),
-(
+  (
     11,
     'Part-Time Studies Wayfinding Station',
     '2019-02-23',
@@ -289,7 +276,7 @@ VALUES (
     1,
     0
   ),
-(
+  (
     12,
     'Part-Time Studies Wayfinding Station',
     '2019-02-23',
@@ -302,7 +289,7 @@ VALUES (
     1,
     0
   ),
-(
+  (
     15,
     'Kick Start Wayfinding Station',
     '2019-04-06',
@@ -315,7 +302,7 @@ VALUES (
     1,
     0
   ),
-(
+  (
     16,
     'Kick Start Wayfinding Station',
     '2019-04-06',
@@ -328,7 +315,7 @@ VALUES (
     1,
     0
   ),
-(
+  (
     17,
     'Kick Start Wayfinding Station',
     '2019-04-07',
@@ -341,7 +328,7 @@ VALUES (
     0,
     0
   ),
-(
+  (
     18,
     'Kick Start Wayfinding Station',
     '2019-04-07',
@@ -354,7 +341,7 @@ VALUES (
     1,
     0
   ),
-(
+  (
     19,
     'Kick Start Wayfinding Station',
     '2019-04-07',
@@ -367,7 +354,7 @@ VALUES (
     1,
     0
   ),
-(
+  (
     20,
     'Welcome Back Feast',
     '2019-04-20',
@@ -380,7 +367,7 @@ VALUES (
     0,
     1
   ),
-(
+  (
     21,
     'Welcome Back Feast',
     '2019-04-21',
@@ -393,7 +380,7 @@ VALUES (
     0,
     1
   ),
-(
+  (
     22,
     'Welcome Back Feast',
     '2019-04-22',
@@ -406,7 +393,7 @@ VALUES (
     0,
     1
   ),
-(
+  (
     23,
     'Welcome Back Feast',
     '2019-04-23',
@@ -419,7 +406,7 @@ VALUES (
     0,
     1
   ),
-(
+  (
     24,
     'Part-Time Studies Wayfinding Station',
     '2019-04-04',
@@ -432,7 +419,7 @@ VALUES (
     0,
     0
   ),
-(
+  (
     25,
     'Part-Time Studies Wayfinding Station',
     '2019-04-04',
@@ -445,7 +432,7 @@ VALUES (
     0,
     0
   ),
-(
+  (
     26,
     'Part-Time Studies Wayfinding Station',
     '2019-04-05',
@@ -458,7 +445,7 @@ VALUES (
     0,
     0
   ),
-(
+  (
     27,
     'Part-Time Studies Wayfinding Station',
     '2019-04-05',
@@ -471,7 +458,7 @@ VALUES (
     0,
     0
   ),
-(
+  (
     28,
     'Part-Time Studies Wayfinding Station',
     '2019-04-06',
@@ -484,7 +471,7 @@ VALUES (
     0,
     0
   ),
-(
+  (
     29,
     'Part-Time Studies Wayfinding Station',
     '2019-04-07',
@@ -497,7 +484,7 @@ VALUES (
     0,
     0
   ),
-(
+  (
     30,
     'Part-Time Studies Wayfinding Station',
     '2019-04-07',
@@ -510,7 +497,7 @@ VALUES (
     0,
     0
   ),
-(
+  (
     31,
     'Kick Start Wayfinding Station',
     '2019-03-07',
@@ -523,7 +510,7 @@ VALUES (
     0,
     0
   ),
-(
+  (
     32,
     'Kick Start Wayfinding Station',
     '2019-03-12',
@@ -536,7 +523,7 @@ VALUES (
     0,
     0
   ),
-(
+  (
     33,
     'Kick Start Wayfinding Station',
     '2019-03-12',
@@ -549,7 +536,7 @@ VALUES (
     0,
     0
   ),
-(
+  (
     34,
     'Kick Start Wayfinding Station',
     '2019-03-12',
@@ -562,7 +549,7 @@ VALUES (
     0,
     0
   ),
-(
+  (
     35,
     'Welcome Back Feast',
     '2019-03-04',
@@ -575,7 +562,7 @@ VALUES (
     0,
     0
   ),
-(
+  (
     36,
     'Welcome Back Feast',
     '2019-03-04',
@@ -588,7 +575,7 @@ VALUES (
     0,
     0
   ),
-(
+  (
     37,
     'Part-Time Studies Wayfinding Station',
     '2019-03-09',
@@ -601,7 +588,7 @@ VALUES (
     0,
     0
   ),
-(
+  (
     38,
     'Part-Time Studies Wayfinding Station',
     '2019-03-09',
@@ -644,154 +631,154 @@ LOCK TABLES `participations` WRITE;
 ;
 INSERT INTO `participations`
 VALUES (1, 'A01874296', 1),
-(2, 'A01961395', 2),
-(3, 'A01969294', 3),
-(4, 'A12341234', 1),
-(5, 'A12341234', 2),
-(6, 'A12341234', 3),
-(7, 'A00054504', 1),
-(8, 'A00116519', 2),
-(9, 'A00135457', 3),
-(10, 'A00149041', 1),
-(11, 'A00227334', 2),
-(12, 'A00232294', 3),
-(13, 'A00305816', 1),
-(14, 'A00410384', 2),
-(15, 'A00478347', 3),
-(16, 'A00499736', 1),
-(17, 'A00532123', 2),
-(18, 'A00543511', 3),
-(19, 'A00559613', 1),
-(20, 'A00561978', 2),
-(21, 'A00569802', 3),
-(22, 'A00579625', 1),
-(23, 'A00594956', 2),
-(24, 'A00629659', 3),
-(25, 'A00637097', 1),
-(26, 'A00647288', 2),
-(27, 'A00734732', 3),
-(29, 'A12345678', 2),
-(30, 'A12345678', 3),
-(31, 'A12345678', 8),
-(35, 'A12345678', 17),
-(37, 'A01874296', 25),
-(38, 'A12341234', 25),
-(39, 'A00054504', 25),
-(40, 'A00149041', 25),
-(41, 'A00305816', 25),
-(42, 'A00499736', 25),
-(43, 'A00559613', 25),
-(44, 'A00579625', 25),
-(45, 'A00637097', 25),
-(52, 'A01874296', 26),
-(53, 'A12341234', 26),
-(54, 'A00054504', 26),
-(55, 'A00149041', 26),
-(56, 'A00305816', 26),
-(57, 'A00499736', 26),
-(58, 'A00559613', 26),
-(59, 'A00579625', 26),
-(60, 'A00637097', 26),
-(67, 'A01874296', 27),
-(68, 'A12341234', 27),
-(69, 'A00054504', 27),
-(70, 'A00149041', 27),
-(71, 'A00305816', 27),
-(72, 'A00499736', 27),
-(73, 'A00559613', 27),
-(74, 'A00579625', 27),
-(75, 'A00637097', 27),
-(82, 'A01874296', 28),
-(83, 'A12341234', 28),
-(84, 'A00054504', 28),
-(85, 'A00149041', 28),
-(86, 'A00305816', 28),
-(87, 'A00499736', 28),
-(88, 'A00559613', 28),
-(89, 'A00579625', 28),
-(90, 'A00637097', 28),
-(97, 'A01874296', 29),
-(98, 'A12341234', 29),
-(99, 'A00054504', 29),
-(100, 'A00149041', 29),
-(101, 'A00305816', 29),
-(102, 'A00499736', 29),
-(103, 'A00559613', 29),
-(104, 'A00579625', 29),
-(105, 'A00637097', 29),
-(112, 'A01874296', 30),
-(113, 'A12341234', 30),
-(114, 'A00054504', 30),
-(115, 'A00149041', 30),
-(116, 'A00305816', 30),
-(117, 'A00499736', 30),
-(118, 'A00559613', 30),
-(119, 'A00579625', 30),
-(120, 'A00637097', 30),
-(127, 'A01874296', 31),
-(128, 'A12341234', 31),
-(129, 'A00054504', 31),
-(130, 'A00149041', 31),
-(131, 'A00305816', 31),
-(132, 'A00499736', 31),
-(133, 'A00559613', 31),
-(134, 'A00579625', 31),
-(135, 'A00637097', 31),
-(142, 'A01874296', 32),
-(143, 'A12341234', 32),
-(144, 'A00054504', 32),
-(145, 'A00149041', 32),
-(146, 'A00305816', 32),
-(147, 'A00499736', 32),
-(148, 'A00559613', 32),
-(149, 'A00579625', 32),
-(150, 'A00637097', 32),
-(157, 'A01874296', 33),
-(158, 'A12341234', 33),
-(159, 'A00054504', 33),
-(160, 'A00149041', 33),
-(161, 'A00305816', 33),
-(162, 'A00499736', 33),
-(163, 'A00559613', 33),
-(164, 'A00579625', 33),
-(165, 'A00637097', 33),
-(172, 'A01874296', 34),
-(173, 'A12341234', 34),
-(174, 'A00054504', 34),
-(175, 'A00149041', 34),
-(176, 'A00305816', 34),
-(177, 'A00499736', 34),
-(178, 'A00559613', 34),
-(179, 'A00579625', 34),
-(180, 'A00637097', 34),
-(187, 'A01874296', 35),
-(188, 'A12341234', 35),
-(189, 'A00054504', 35),
-(190, 'A00149041', 35),
-(191, 'A00305816', 35),
-(192, 'A00499736', 35),
-(193, 'A00559613', 35),
-(194, 'A00579625', 35),
-(195, 'A00637097', 35),
-(202, 'A01874296', 3),
-(203, 'A12341234', 3),
-(204, 'A00054504', 3),
-(205, 'A00149041', 3),
-(206, 'A00305816', 3),
-(207, 'A00499736', 3),
-(208, 'A00559613', 3),
-(209, 'A00579625', 3),
-(210, 'A00637097', 3),
-(217, 'A01874296', 36),
-(218, 'A12341234', 36),
-(219, 'A00054504', 36),
-(220, 'A00149041', 36),
-(221, 'A00305816', 36),
-(222, 'A00499736', 36),
-(223, 'A00559613', 36),
-(224, 'A00579625', 36),
-(225, 'A00637097', 36),
-(226, 'A12345678', 20);
+  (2, 'A01961395', 2),
+  (3, 'A01969294', 3),
+  (4, 'A12341234', 1),
+  (5, 'A12341234', 2),
+  (6, 'A12341234', 3),
+  (7, 'A00054504', 1),
+  (8, 'A00116519', 2),
+  (9, 'A00135457', 3),
+  (10, 'A00149041', 1),
+  (11, 'A00227334', 2),
+  (12, 'A00232294', 3),
+  (13, 'A00305816', 1),
+  (14, 'A00410384', 2),
+  (15, 'A00478347', 3),
+  (16, 'A00499736', 1),
+  (17, 'A00532123', 2),
+  (18, 'A00543511', 3),
+  (19, 'A00559613', 1),
+  (20, 'A00561978', 2),
+  (21, 'A00569802', 3),
+  (22, 'A00579625', 1),
+  (23, 'A00594956', 2),
+  (24, 'A00629659', 3),
+  (25, 'A00637097', 1),
+  (26, 'A00647288', 2),
+  (27, 'A00734732', 3),
+  (29, 'A12345678', 2),
+  (30, 'A12345678', 3),
+  (31, 'A12345678', 8),
+  (35, 'A12345678', 17),
+  (37, 'A01874296', 25),
+  (38, 'A12341234', 25),
+  (39, 'A00054504', 25),
+  (40, 'A00149041', 25),
+  (41, 'A00305816', 25),
+  (42, 'A00499736', 25),
+  (43, 'A00559613', 25),
+  (44, 'A00579625', 25),
+  (45, 'A00637097', 25),
+  (52, 'A01874296', 26),
+  (53, 'A12341234', 26),
+  (54, 'A00054504', 26),
+  (55, 'A00149041', 26),
+  (56, 'A00305816', 26),
+  (57, 'A00499736', 26),
+  (58, 'A00559613', 26),
+  (59, 'A00579625', 26),
+  (60, 'A00637097', 26),
+  (67, 'A01874296', 27),
+  (68, 'A12341234', 27),
+  (69, 'A00054504', 27),
+  (70, 'A00149041', 27),
+  (71, 'A00305816', 27),
+  (72, 'A00499736', 27),
+  (73, 'A00559613', 27),
+  (74, 'A00579625', 27),
+  (75, 'A00637097', 27),
+  (82, 'A01874296', 28),
+  (83, 'A12341234', 28),
+  (84, 'A00054504', 28),
+  (85, 'A00149041', 28),
+  (86, 'A00305816', 28),
+  (87, 'A00499736', 28),
+  (88, 'A00559613', 28),
+  (89, 'A00579625', 28),
+  (90, 'A00637097', 28),
+  (97, 'A01874296', 29),
+  (98, 'A12341234', 29),
+  (99, 'A00054504', 29),
+  (100, 'A00149041', 29),
+  (101, 'A00305816', 29),
+  (102, 'A00499736', 29),
+  (103, 'A00559613', 29),
+  (104, 'A00579625', 29),
+  (105, 'A00637097', 29),
+  (112, 'A01874296', 30),
+  (113, 'A12341234', 30),
+  (114, 'A00054504', 30),
+  (115, 'A00149041', 30),
+  (116, 'A00305816', 30),
+  (117, 'A00499736', 30),
+  (118, 'A00559613', 30),
+  (119, 'A00579625', 30),
+  (120, 'A00637097', 30),
+  (127, 'A01874296', 31),
+  (128, 'A12341234', 31),
+  (129, 'A00054504', 31),
+  (130, 'A00149041', 31),
+  (131, 'A00305816', 31),
+  (132, 'A00499736', 31),
+  (133, 'A00559613', 31),
+  (134, 'A00579625', 31),
+  (135, 'A00637097', 31),
+  (142, 'A01874296', 32),
+  (143, 'A12341234', 32),
+  (144, 'A00054504', 32),
+  (145, 'A00149041', 32),
+  (146, 'A00305816', 32),
+  (147, 'A00499736', 32),
+  (148, 'A00559613', 32),
+  (149, 'A00579625', 32),
+  (150, 'A00637097', 32),
+  (157, 'A01874296', 33),
+  (158, 'A12341234', 33),
+  (159, 'A00054504', 33),
+  (160, 'A00149041', 33),
+  (161, 'A00305816', 33),
+  (162, 'A00499736', 33),
+  (163, 'A00559613', 33),
+  (164, 'A00579625', 33),
+  (165, 'A00637097', 33),
+  (172, 'A01874296', 34),
+  (173, 'A12341234', 34),
+  (174, 'A00054504', 34),
+  (175, 'A00149041', 34),
+  (176, 'A00305816', 34),
+  (177, 'A00499736', 34),
+  (178, 'A00559613', 34),
+  (179, 'A00579625', 34),
+  (180, 'A00637097', 34),
+  (187, 'A01874296', 35),
+  (188, 'A12341234', 35),
+  (189, 'A00054504', 35),
+  (190, 'A00149041', 35),
+  (191, 'A00305816', 35),
+  (192, 'A00499736', 35),
+  (193, 'A00559613', 35),
+  (194, 'A00579625', 35),
+  (195, 'A00637097', 35),
+  (202, 'A01874296', 3),
+  (203, 'A12341234', 3),
+  (204, 'A00054504', 3),
+  (205, 'A00149041', 3),
+  (206, 'A00305816', 3),
+  (207, 'A00499736', 3),
+  (208, 'A00559613', 3),
+  (209, 'A00579625', 3),
+  (210, 'A00637097', 3),
+  (217, 'A01874296', 36),
+  (218, 'A12341234', 36),
+  (219, 'A00054504', 36),
+  (220, 'A00149041', 36),
+  (221, 'A00305816', 36),
+  (222, 'A00499736', 36),
+  (223, 'A00559613', 36),
+  (224, 'A00579625', 36),
+  (225, 'A00637097', 36),
+  (226, 'A12345678', 20);
 /*!40000 ALTER TABLE `participations` ENABLE KEYS */
 ;
 UNLOCK TABLES;
@@ -830,7 +817,7 @@ VALUES (
     'admin',
     'vbridgen1d@tuttocitta.it'
   ),
-(
+  (
     'A00054504',
     'I16J1J5g',
     'student',
@@ -839,7 +826,7 @@ VALUES (
     'Galbraeth',
     'jgalbraethz@fema.gov'
   ),
-(
+  (
     'A00116519',
     'ryDi905cyFPA',
     'student',
@@ -848,7 +835,7 @@ VALUES (
     'Avon',
     'havon6@liveinternet.ru'
   ),
-(
+  (
     'A00135457',
     '0y2mp0mLqmcO',
     'student',
@@ -857,7 +844,7 @@ VALUES (
     'Wines',
     'pwinesh@imageshack.us'
   ),
-(
+  (
     'A00149041',
     '1q8I5n4c',
     'student',
@@ -866,7 +853,7 @@ VALUES (
     'Dundredge',
     'gdundredgee@t-online.de'
   ),
-(
+  (
     'A00227334',
     'hmLqjiMv',
     'student',
@@ -875,7 +862,7 @@ VALUES (
     'Pellington',
     'hpellingtonw@noaa.gov'
   ),
-(
+  (
     'A00232294',
     'JHEnBfTko',
     'student',
@@ -884,7 +871,7 @@ VALUES (
     'Liddall',
     'cliddallm@rambler.ru'
   ),
-(
+  (
     'A00305816',
     'xPzMCnEUM2q',
     'student',
@@ -893,7 +880,7 @@ VALUES (
     'O\'Hallagan',
     'aohallagan1b@samsung.com'
   ),
-(
+  (
     'A00410384',
     'xddsFl',
     'student',
@@ -902,7 +889,7 @@ VALUES (
     'McCullen',
     'emccullen2@squidoo.com'
   ),
-(
+  (
     'A00478347',
     'KC2GUEzjMwL9',
     'student',
@@ -911,7 +898,7 @@ VALUES (
     'Lodovichi',
     'clodovichil@tiny.cc'
   ),
-(
+  (
     'A00499736',
     '9duOXmAxBH',
     'student',
@@ -920,7 +907,7 @@ VALUES (
     'Kief',
     'akief3@gravatar.com'
   ),
-(
+  (
     'A00532123',
     'jzvAUz8zO',
     'student',
@@ -929,7 +916,7 @@ VALUES (
     'Harcus',
     'hharcus13@abc.net.au'
   ),
-(
+  (
     'A00543511',
     '5edfJo5',
     'student',
@@ -938,7 +925,7 @@ VALUES (
     'Barrie',
     'hbarrieg@simplemachines.org'
   ),
-(
+  (
     'A00559613',
     'rqbM7cLQ',
     'student',
@@ -947,7 +934,7 @@ VALUES (
     'Edwardes',
     'redwardesd@eepurl.com'
   ),
-(
+  (
     'A00561978',
     'mppghXrPkVH',
     'student',
@@ -956,7 +943,7 @@ VALUES (
     'Ebbs',
     'gebbs1@harvard.edu'
   ),
-(
+  (
     'A00569802',
     'l4CyXNLEq',
     'student',
@@ -965,7 +952,7 @@ VALUES (
     'Gabey',
     'bgabeyk@usda.gov'
   ),
-(
+  (
     'A00579625',
     '2hn4g99JVO',
     'student',
@@ -974,7 +961,7 @@ VALUES (
     'Lodemann',
     'flodemannr@oaic.gov.au'
   ),
-(
+  (
     'A00594956',
     'iu2EInv',
     'student',
@@ -983,7 +970,7 @@ VALUES (
     'O\'Nions',
     'tonionsv@vkontakte.ru'
   ),
-(
+  (
     'A00629659',
     'qvkrfNM9gK',
     'student',
@@ -992,7 +979,7 @@ VALUES (
     'Martensen',
     'amartensen18@freewebs.com'
   ),
-(
+  (
     'A00637097',
     'x6BkOLDrdsJ',
     'student',
@@ -1001,7 +988,7 @@ VALUES (
     'Klejna',
     'tklejnan@flavors.me'
   ),
-(
+  (
     'A00647288',
     'JAUyuPvxSKYR',
     'student',
@@ -1010,7 +997,7 @@ VALUES (
     'Hillaby',
     'shillabyy@walmart.com'
   ),
-(
+  (
     'A00734732',
     'klb8Fg32R',
     'student',
@@ -1019,7 +1006,7 @@ VALUES (
     'Bridgen',
     'vbridgen1d@tuttocitta.it'
   ),
-(
+  (
     'A00764151',
     'Y4iLRtw',
     'student',
@@ -1028,7 +1015,7 @@ VALUES (
     'Renzini',
     'srenzinix@microsoft.com'
   ),
-(
+  (
     'A00911441',
     'XFaZIChV5m',
     'student',
@@ -1037,7 +1024,7 @@ VALUES (
     'Gimlet',
     'wgimletu@state.tx.us'
   ),
-(
+  (
     'A00971560',
     'EOtkSK',
     'student',
@@ -1046,7 +1033,7 @@ VALUES (
     'Dodimead',
     'idodimead14@rakuten.co.jp'
   ),
-(
+  (
     'A00984378',
     'T9gIimKJ',
     'student',
@@ -1055,7 +1042,7 @@ VALUES (
     'Routham',
     'groutham7@xinhuanet.com'
   ),
-(
+  (
     'A01115548',
     'p3iz7VK',
     'student',
@@ -1064,7 +1051,7 @@ VALUES (
     'Whylie',
     'pwhylie17@addthis.com'
   ),
-(
+  (
     'A01135113',
     'M5TL5L',
     'student',
@@ -1073,7 +1060,7 @@ VALUES (
     'Edmondson',
     'iedmondson16@ihg.com'
   ),
-(
+  (
     'A01162510',
     'udYLvYExQkcv',
     'student',
@@ -1082,7 +1069,7 @@ VALUES (
     'Bevington',
     'bbevingtonf@webs.com'
   ),
-(
+  (
     'A01208491',
     'XIivTxY1Tl',
     'student',
@@ -1091,7 +1078,7 @@ VALUES (
     'Tremellan',
     'vtremellan8@geocities.jp'
   ),
-(
+  (
     'A01215862',
     'uUwiBdGI',
     'student',
@@ -1100,7 +1087,7 @@ VALUES (
     'Dowsett',
     'jdowsettb@nytimes.com'
   ),
-(
+  (
     'A01223712',
     'eWTfY0',
     'student',
@@ -1109,7 +1096,7 @@ VALUES (
     'Siney',
     'bsineyc@yahoo.co.jp'
   ),
-(
+  (
     'A01255468',
     'xfx3wO',
     'student',
@@ -1118,7 +1105,7 @@ VALUES (
     'Trethewey',
     'ttrethewey12@examiner.com'
   ),
-(
+  (
     'A01274251',
     'dF5djoK0j39r',
     'student',
@@ -1127,7 +1114,7 @@ VALUES (
     'Burdge',
     'tburdges@creativecommons.org'
   ),
-(
+  (
     'A01351957',
     'vVh9Zt6Gy',
     'student',
@@ -1136,7 +1123,7 @@ VALUES (
     'Giveen',
     'tgiveen4@ning.com'
   ),
-(
+  (
     'A01382840',
     '2xN1mXNynK',
     'student',
@@ -1145,7 +1132,7 @@ VALUES (
     'Gooda',
     'agooda5@oaic.gov.au'
   ),
-(
+  (
     'A01422294',
     'aGzXvivL7nX',
     'student',
@@ -1154,7 +1141,7 @@ VALUES (
     'Budd',
     'wbudd15@stumbleupon.com'
   ),
-(
+  (
     'A01480785',
     'a1RlOQOkg',
     'student',
@@ -1163,7 +1150,7 @@ VALUES (
     'Copins',
     'lcopins10@noaa.gov'
   ),
-(
+  (
     'A01484703',
     'ywGI8yIqMB6O',
     'student',
@@ -1172,7 +1159,7 @@ VALUES (
     'Wilshaw',
     'rwilshaw11@accuweather.com'
   ),
-(
+  (
     'A01490607',
     'nkaKbbBn1PX',
     'student',
@@ -1181,7 +1168,7 @@ VALUES (
     'Dabes',
     'mdabest@newyorker.com'
   ),
-(
+  (
     'A01524400',
     'EsEMTWmlI5B',
     'student',
@@ -1190,7 +1177,7 @@ VALUES (
     'Brecon',
     'mbrecono@scribd.com'
   ),
-(
+  (
     'A01599716',
     'zgNJUKCw',
     'student',
@@ -1199,7 +1186,7 @@ VALUES (
     'Wallentin',
     'nwallentini@mozilla.com'
   ),
-(
+  (
     'A01627069',
     'UEs7Fwxv',
     'student',
@@ -1208,7 +1195,7 @@ VALUES (
     'Coyte',
     'jcoytej@marketwatch.com'
   ),
-(
+  (
     'A01639069',
     '8NqIUn19',
     'student',
@@ -1217,7 +1204,7 @@ VALUES (
     'Hearne',
     'mhearnea@usnews.com'
   ),
-(
+  (
     'A01648159',
     '2DwAOJhk4a',
     'student',
@@ -1226,7 +1213,7 @@ VALUES (
     'McIlhone',
     'bmcilhoneq@privacy.gov.au'
   ),
-(
+  (
     'A01657063',
     'Ty85jQbL',
     'student',
@@ -1235,7 +1222,7 @@ VALUES (
     'Garrie',
     'dgarrie1a@prweb.com'
   ),
-(
+  (
     'A01695233',
     'NrCinfHZ9NP',
     'student',
@@ -1244,7 +1231,7 @@ VALUES (
     'Stetson',
     'pstetson0@shutterfly.com'
   ),
-(
+  (
     'A01830112',
     'kae0Z5',
     'student',
@@ -1253,7 +1240,7 @@ VALUES (
     'Bletso',
     'jbletso1c@barnesandnoble.com'
   ),
-(
+  (
     'A01874296',
     'W7mpNeiSho',
     'staff',
@@ -1262,7 +1249,7 @@ VALUES (
     'Borzone',
     'kborzone19@si.edu'
   ),
-(
+  (
     'A01961395',
     'QGdl3moMmm',
     'staff',
@@ -1271,7 +1258,7 @@ VALUES (
     'Farren',
     'bfarrenp@reddit.com'
   ),
-(
+  (
     'A01969294',
     'CrLcCsQzP',
     'staff',
@@ -1280,7 +1267,7 @@ VALUES (
     'Sirkett',
     'gsirkett9@blogger.com'
   ),
-(
+  (
     'A12341234',
     '1234',
     'staff',
@@ -1289,7 +1276,7 @@ VALUES (
     'Doe',
     'email2@gmail.com'
   ),
-(
+  (
     'A12345678',
     '1234',
     'student',
