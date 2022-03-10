@@ -1,8 +1,4 @@
-/*body {
-    background-color: #F7F7F7;
-}*/
 
-// {{!-- !-- Events Page -- --}}
 #topBar {
     position: absolute; 
     width: 100vw; 
@@ -30,7 +26,7 @@
     float: right;
     position: relative;
     height: auto;
-    width: ;
+    width: 1;
 }
 
 #boxDiv {

@@ -26,12 +26,15 @@ router.post('/donate', async (request, response) => {
         user_id = request.session.user.users_id;
         ammount = request.body.ammount;
 
+
         result = await eventConnector.donatingEvent(event_id, ammount);
 
         console.log(result);
 
-        //  response.redirect('/main');
-        response.redirect(request.get('referer'));
+        response.redirect('/main');
+        // response.redirect(request.get('referer'));
+
+
 
     }
     catch (err) {

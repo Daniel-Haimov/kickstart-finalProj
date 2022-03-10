@@ -334,13 +334,13 @@ const renderEvents = (rows) => {
                 <div class="eventboxinfo">
                     <h3>${row.events_title}</h3>
                     <span class="endTime">${row.events_end_time}</span><br/>
-                    <span class="eventsGoal">${row.events_ammount}/${row.events_goal}</span><br/>
+                    <span class="eventsGoal">Total ${row.events_ammount} </br>From ${row.events_goal}</span><br/>
                     <p class="eventsDesc">${row.events_desc}</p>
-                    <label class="floatLabel" for="donateInput">A</label>
-                        <input class="fieldInput" name="donateInput" min=0 max=3000000 id="donateInput${row.events_id}" type="number"
+                    <label class="floatLabel" for="donateInput">donate here </label>
+                        <input class="fieldInput" style="background:none;border:2px solid $clr-gray300;width:25%;border-radius:$radius; padding:0.5rem; outline:none" name="donateInput" min=0 max=3000000 id="donateInput${row.events_id}" type="number"
                             value="" required>
 
-                    <button class="eventsButton" onclick="Donate(${row.events_id}); event.target.innerHTML='Donated'; event.target.style.backgroundColor='#7e7e7e'">Donate</button>
+                    <button class="eventsButton"  onclick="Donate(${row.events_id}); event.target.innerHTML='Donated'; event.target.style.backgroundColor='#7e7e7e'">Donate</button>
                 </div>
 
             </div>`
@@ -380,6 +380,9 @@ const donatingEvent = (event_id, ammount) => {
         });
 
         connector.connect();
+        if (connector.events_ammount == Number(ammount)) {
+
+        }
         connector.query("UPDATE kickstart_events SET events_ammount = events_ammount + ? WHERE events_id = ?;", [Number(ammount), Number(event_id)], (error, rows, fields) => {
             if (error) reject(error); else resolve(rows);
         });
