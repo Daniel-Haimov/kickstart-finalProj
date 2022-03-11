@@ -55,7 +55,7 @@ const insertUser = (inputArray) => {
 
         connector.connect();
 
-        connector.query("INSERT INTO `realkickstart`.`users` (`users_id`, `users_pw`, `users_type`, `users_point`, `users_firstName`, `users_lastName`, `users_email`) VALUES ( ?, ? , ?, ?, ?, ?,?);", inputArray, (error, rows, fields) => {
+        connector.query("INSERT INTO `realkickstart`.`users` (`users_id`, `users_pw`, `users_type`, `users_point`, `users_firstName`, `users_lastName`, `users_email`) VALUES ( ?, ? , ?, 0, ?, ?,?);", inputArray, (error, rows, fields) => {
             if (error) reject(error); else resolve(rows);
         });
 

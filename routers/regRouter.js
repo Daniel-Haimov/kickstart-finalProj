@@ -16,7 +16,6 @@ router.post('/', async (request, response) => {
             request.body.regID,
             request.body.regPw,
             request.body.regType,
-            request.body.regPoint,
             request.body.regFname,
             request.body.regLname,
             request.body.regEmail

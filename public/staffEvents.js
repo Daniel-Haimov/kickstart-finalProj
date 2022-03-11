@@ -9,8 +9,6 @@ let points = document.getElementById("pointsInput");
 let desc = document.getElementById("descriptionInput");
 let inputH2 = document.getElementById("inputH2");
 let idInput = document.getElementById("eventIdInput");
-let imgInput = document.getElementById("imgInput");
-
 
 
 let selectedEvent;
@@ -37,7 +35,7 @@ let greyDiv = document.getElementById("greyDiv");
 
 
 const editEvent = (id) => {
-    fetch(window.location.origin + "/admin/edit/" + id)
+    fetch(window.location.origin + "/staff/edit/" + id)
         .then(res => res.json())
         .then(res => {
             inputH2.innerHTML = "Update Event " + id;
@@ -53,7 +51,6 @@ const editEvent = (id) => {
             address.value = event["events_locations"];
             points.value = event["events_points"];
             desc.value = event["events_desc"];
-            imgInput.value = event["events_img_src"]
         })
         .catch(err => console.log(err));
 }
@@ -61,7 +58,7 @@ const editEvent = (id) => {
 const deleteEvent = (id) => {
     selectedEvent = id;
 
-    fetch(window.location.origin + "/admin/delete/" + id)
+    fetch(window.location.origin + "/staff/edit/" + id)
         .then(res => res.json())
         .then(res => {
             let event = res.event[0];
@@ -83,7 +80,7 @@ const deleteEvent = (id) => {
 const confirmEvent = (id) => {
     selectedEvent = id;
 
-    fetch(window.location.origin + "/admin/finish/" + id)
+    fetch(window.location.origin + "/staff/edit/" + id)
         .then(res => res.json())
         .then(res => {
             let event = res.event[0];
@@ -125,9 +122,9 @@ const closePopup = () => {
 }
 
 const deleteConfirmed = () => {
-    window.location.replace(window.location.origin + "/admin/delete/" + selectedEvent);
+    window.location.replace(window.location.origin + "/staff/delete/" + selectedEvent);
 }
 
 const finishConfirmed = () => {
-    window.location.replace(window.location.origin + "/admin/finish/" + selectedEvent);
+    window.location.replace(window.location.origin + "/staff/finish/" + selectedEvent);
 }

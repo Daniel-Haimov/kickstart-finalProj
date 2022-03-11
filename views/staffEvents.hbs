@@ -6,97 +6,95 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Events Page</title>
-        <link href='/style.css' rel='stylesheet' type='text/css'/>
-        <link href='/staff.css' rel='stylesheet' type='text/css'/>
+    <link href='/style.css' rel='stylesheet' type='text/css' />
+    <link href='/staff.css' rel='stylesheet' type='text/css' />
 </head>
 
 <body>
     {{> staffNav}}
 
-    <div id="contentDiv">
-        <h1 style="padding-top: 30px; padding-bottom: 50px;">Current Events</h1>
-        {{!-- display events --}}
-        {{!-- event title onclick, display participants --}}
-        {{!-- confirm btn for each participants --}}
-        {{!-- confirm all btn to make the events finished and insert finished_events each participant --}}
-        {{errorMessage}}
-        {{#each events}}<div class="staffEventDiv">
-            <div class="staffEventTitle" onclick="revealPDiv({{this.events_id}});">
-                <h3>{{this.events_title}}<span>&nbsp | &nbsp{{this.events_date}}</span><button style="float: right; margin-right: 40px;" onclick="confirm({{this.events_id}})">confirm</button></h3>
-            </div>
-            <div class = "participantDiv" id="participantDiv{{this.events_id}}">
-                <div style="background-color: #fff; color: 515456" id="participantList{{this.events_id}}">
-                </div>
-            </div>  
-        </div>{{/each}}
-                
-       
+    <div id="adminEventFinishPopupDiv">
+        <h2 style="text-align: center;">Do you want to finish this event</h2>
+        <p><Strong>Title: </Strong><span id="finishPopupTitle"></span></p>
+        <p><Strong>Date: </Strong><span id="finishPopupDate"></span></p>
+        <p><Strong>Participants:</Strong></p>
+        <ul id="participantsList"></ul>
+        <button class="deletePopupBtn" onclick="finishConfirmed()">Finish</button>
+        <button style="background-color: #bcb8b8; color: black" onmouseover="this.style.backgroundColor='#a8a6a6';"
+            onmouseout="this.style.backgroundColor='#bcb8b8'" class="deletePopupBtn" onclick="closePopup()">No</button>
+        <button id="deletePopupCloseBtn" onclick="closePopup()">X</button>
     </div>
-<script>
-    const revealPDiv =  (eventId) => {
-        let pDiv = document.getElementById("participantDiv"+ eventId);
-        let pL = document.getElementById("participantList"+ eventId)
-        fetch(window.location.origin + "/staff/participants/" + eventId)
-        .then(res => res.json())
-        .then(res=>{
-            if (pDiv.style.display != "block") {
-                if (!res.participants.length) {
-                    let li = document.createElement('li'); 
-                    li.innerHTML = "No participant registered..."
-                    li.style.color = "red";
-                    pL.appendChild(li);
-                }
-                for (participant of res.participants){
-                    let li = document.createElement('div');
-                    let name = document.createElement('span');
-                    let sId = document.createElement('span');
-                    let cB = document.createElement('button');
-                    cB.classList.add("closeBut");
-                    cB.innerHTML = "X";
-                    cB.addEventListener('click', () => {
-                            fetch(window.location.origin + "/staff/delete", {
-                                method: "POST", 
-                                headers: {
-                                    "Content-Type": "application/json",
-                                },
-                                body: JSON.stringify({studentId:participant.studentId, eventId: eventId}),
-                            })
-                            .then(res=>res.json())
-                            .then(res=>{
-                                cB.parentNode.parentNode.removeChild(cB.parentNode);
-                            })
-                            .catch(e=>console.log(e));
-                        });
-                    sId.innerHTML = participant.studentId + ' ';
-                    name.innerHTML = participant.studentName + ' ';
-                    li.appendChild(cB);
-                    li.appendChild(sId);
-                    li.appendChild(name);
-                    pL.appendChild(li);
-                }
-                pDiv.style.display = "block";
-            } else {
-                while (pL.firstChild){
-                    pL.removeChild(pL.firstChild);
-                }
-                pDiv.style.display = "none";
-            }
-        }).catch(e=>console.log(e));
-    }
 
-    const confirm = (eventId) => {
-        window.location.replace(window.location.origin + "/staff/finish/" + eventId);
-    }
+    <div id="adminEventDeletePopupDiv">
+        <h2 style="text-align: center;">Deleting event will remove participants. Do you still want to proceed? </h2>
+        <p><Strong>Title: </Strong><span id="deletePopupTitle"></span></p>
+        <p><Strong>Date: </Strong><span id="deletePopupDate"></span></p>
+        <p><Strong>End Time: </Strong><span id="deletePopupEndTime"></span></p>
+        <p><Strong>Goal: </Strong><span id="deletePopupPoints"></span></p>
+        <p><Strong>Description: </Strong><span id="deletePopupDesc"></span></p>
+        <button class="deletePopupBtn" onclick="deleteConfirmed()">Yes</button>
+        <button style="background-color: #bcb8b8; color: black" onmouseover="this.style.backgroundColor='#a8a6a6';"
+            onmouseout="this.style.backgroundColor='#bcb8b8'" class="deletePopupBtn" onclick="closePopup()">No</button>
+        <button id="deletePopupCloseBtn" onclick="closePopup()">X</button>
+    </div>
 
-    const closePDiv = (eventId) => {
-        let pDiv = document.getElementById("participantDiv"+ eventId);
-        let pL = document.getElementById("participantList"+ eventId)
-        while (pL.firstChild){
-            pL.removeChild(pL.firstChild);
-        }
-        pDiv.style.display = "none";
-    }
-</script>
+    <div id="contentDiv">
+        <div id="formDivWrap">
+            <div id="formDiv">
+                <h2 id="inputH2">New Event<br><br></h2>
+                <form action="/staff" enctype="application/json" method="POST" id="adminEventForm">
+                    <input id="isEdit" style="display:none" name="isEdit" type="text" value="false">
+                    <div class="adminEventFormDiv">
+                        <label class="floatLabel" for="eventIdInput">ID </label>
+                        <input class="fieldInput" name="eventIdInput" id="eventIdInput" type="text" value="" required>
+                    </div>
+                    <div class="adminEventFormDiv">
+                        <label class="floatLabel" for="eventTitleInput">Event Name</label>
+                        <input class="fieldInput" name="eventTitleInput" id="eventTitleInput" type="text" value=""
+                            required>
+                    </div>
+                    <div class="adminEventFormDiv">
+                        <label class="floatLabel" for="dateInput">Date</label>
+                        <input class="fieldInput" name="dateInput" id="dateInput" type="date" value="" required>
+                    </div>
+                    <div class="adminEventFormDiv">
+                        <label class="floatLabel" for="endTimeInput">End Time</label>
+                        <input class="fieldInput" name="endTimeInput" id="endTimeInput" type="time" value="" required>
+                    </div>
+
+
+                    <div class="adminEventFormDiv">
+                        <label class="floatLabel" for="goalInput">Goal</label>
+                        <input class="fieldInput" name="goalInput" min=0 max=3000000 id="goalInput" type="number"
+                            value="" required>
+                    </div>
+                    <div class="adminEventFormDiv">
+                        <label class="floatLabel" for="descriptionInput">Description</label>
+                        <input class="fieldInput" name="descInput" id="descriptionInput" rows=5 type="textarea" value=""
+                            required>
+                    </div>
+                    <div class="adminEventFormDiv">
+                        <label class="floatLabel" for="imgInput">Image Url</label>
+                        <input class="fieldInput" name="imgInput" id="imgInput" rows=5 type="textarea" value=""
+                            required>
+                    </div>
+
+                    <br><input class="submitButton" type="submit">
+                </form>
+            </div>
+        </div>
+        <div id="adminEventDiv">
+            <h2>Current Events<br><br></h2>
+            {{ errorMessage }}
+            <table id="adminEventtb">
+                {{{renderedAdminEvents}}}
+            </table>
+        </div>
+    </div>
+
+    <div id="greyDiv"></div>
+
+    <script src="/staffEvents.js"></script>
 </body>
 
 </html>

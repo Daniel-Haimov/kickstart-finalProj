@@ -32,8 +32,6 @@ router.post('/donate', async (request, response) => {
         console.log(result);
 
         response.redirect('/main');
-        // response.redirect(request.get('referer'));
-
 
 
     }

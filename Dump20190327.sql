@@ -137,6 +137,7 @@ CREATE TABLE `kickstart_events` (
   `events_desc` varchar(1000) NOT NULL,
   `events_isFinished` tinyint(1) NOT NULL DEFAULT '0',
   `events_ammount` int(5) NOT NULL,
+  `staff_id` varchar(12) NOT NULL,
   PRIMARY KEY (`events_id`)
 ) ENGINE = InnoDB AUTO_INCREMENT = 46 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */
@@ -156,7 +157,8 @@ VALUES (
     1000,
     'Get help on your first day at BCIT! Kick Start volunteers will be available to help answer any questions that you may have.',
     1,
-    0
+    0,
+    12333
   ),
   (
     2,
@@ -166,7 +168,8 @@ VALUES (
     1000,
     'Get help on your first day at BCIT! Kick Start volunteers will be available to help answer any questions that you may have.',
     1,
-    0
+    0,
+    12333
   ),
   (
     3,
@@ -176,7 +179,8 @@ VALUES (
     1000,
     'Get help on your first day at BCIT! Kick Start volunteers will be available to help answer any questions that you may have.',
     1,
-    0
+    0,
+    12333
   ),
   (
     4,
@@ -186,7 +190,8 @@ VALUES (
     1000,
     'Get help on your first day at BCIT! Kick Start volunteers will be available to help answer any questions that you may have.',
     1,
-    0
+    0,
+    1234
   ),
   (
     5,
@@ -196,7 +201,8 @@ VALUES (
     1000,
     'Get help on your first day at BCIT! Kick Start volunteers will be available to help answer any questions that you may have.',
     1,
-    0
+    0,
+    1234
   ),
   (
     6,

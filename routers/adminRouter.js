@@ -56,6 +56,8 @@ router.post('/', async (request, response) => {
                 request.body.endTimeInput,
                 request.body.goalInput,
                 request.body.descInput,
+                request.body.imgInput
+
             ]
             let result = await eventConnector.updateEvent(request.body.eventIdInput, inputs);
             console.log("result from update event:", result);
@@ -66,7 +68,9 @@ router.post('/', async (request, response) => {
                 request.body.dateInput,
                 request.body.endTimeInput,
                 request.body.goalInput,
-                request.body.descInput
+                request.body.descInput,
+                request.session.user.users_id,
+                request.body.imgInput
             ]
             let result = await eventConnector.insertEvent(inputs);
             console.log(result);
@@ -97,16 +101,15 @@ router.post('/', async (request, response) => {
 router.get('/edit/:id', async (request, response) => {
     // validate request.params.id;
     let event = await eventConnector.fetchEventById(request.params.id);
-    let participants = await eventConnector.fetchParticipationsByEventId(request.params.id);
-    response.json({ event: event, participants: participants });
+    response.json({ event: event });
 
 })
 
 router.get('/delete/:id', async (request, response) => {
     try {
         // delete 
-        let deleteEventFromParticipationResult = await eventConnector.deleteParticipationById(request.params.id);
         let deleteEventResult = await eventConnector.deleteEventById(request.params.id);
+        console.log(deleteEventResult);
         let events = await eventConnector.fetchEvents();
         let renderedAdminEvents = eventConnector.renderAdminEvents(events);
         response.render('adminEvents.hbs', {
@@ -122,16 +125,10 @@ router.get('/delete/:id', async (request, response) => {
 
 router.get('/finish/:id', async (request, response) => {
     try {
-        // insert into finished_events
-        // delete from  participation
-        // update event to finish
         let eventId = request.params.id;
         let event = await eventConnector.fetchEventById(eventId);
         let point = event[0].events_points;
         console.log(event[0]);
-        let updatePointResult = await eventConnector.updateUsersPoint(point, eventId);
-        let confirmEventResult = await eventConnector.confirmParticipationByEventId(eventId);
-        let deleteParticipationResult = await eventConnector.deleteParticipationById(eventId);
         let finishEventResult = await eventConnector.finishEventById(eventId);
         let events = await eventConnector.fetchEvents();
         let renderedAdminEvents = eventConnector.renderAdminEvents(events);

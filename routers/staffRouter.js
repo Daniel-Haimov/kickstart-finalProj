@@ -19,12 +19,16 @@ router.get('/', async (request, response) => {
 
 router.get('/events', async (request, response) => {
     try {
-        events = await eventConnector.fetchEvents();
-        response.render('staffEvents.hbs', { events });
+        let events = await eventConnector.fetchEventsByUser(request.session.user.users_id);
+        let renderedAdminEvents = eventConnector.renderAdminEvents(events);
+        response.render('staffEvents.hbs', {
+            renderedAdminEvents
+        });
+
     }
     catch (err) {
         console.log(err);
-        response.render('staffEvents.hbs', { errorMessage: "error" })
+        response.render('staffEvents.hbs', err)
     }
 });
 /* receives eventId and returns participants [{stdId, stdName},...]*/
@@ -134,4 +138,54 @@ router.post('/challenges/student', async (request, response) => {
         })
     }
 })
+
+router.post('/', async (request, response) => {
+    try {
+        console.log("in post handler to the route '/staff'", request.body);
+
+        if (request.body.isEdit === "true") {
+            //  validate update render
+            console.log("update an event", request.body);
+            let inputs = [
+                request.body.eventTitleInput,
+                request.body.dateInput,
+                request.body.endTimeInput,
+                request.body.goalInput,
+                request.body.descInput,
+                request.body.imgInput
+            ]
+            let result = await eventConnector.updateEvent(request.body.eventIdInput, inputs);
+            console.log("result from update event:", result);
+        } else if (request.body.isEdit === "false") {
+            console.log("insert an event", request.body);
+            let inputs = [
+                request.body.eventTitleInput,
+                request.body.dateInput,
+                request.body.endTimeInput,
+                request.body.goalInput,
+                request.body.descInput,
+                request.session.user.users_id,
+                request.body.imgInput
+
+            ]
+            let result = await eventConnector.insertEvent(inputs);
+            console.log(result);
+            //  validate insert render
+            // validate(obj ) => for key of obj if null value raise error("wrong input")
+        }
+
+        // render updated list of events
+        let events = await eventConnector.fetchEventsByUser(request.session.user.users_id);
+        let renderedAdminEvents = eventConnector.renderAdminEvents(events);
+        response.render('staffEvents.hbs', {
+            renderedAdminEvents
+        });
+    }
+    catch (err) {
+        response.render('staffEvents.hbs', {
+            errorMessage: err
+        });
+    }
+})
+
 module.exports = router;
