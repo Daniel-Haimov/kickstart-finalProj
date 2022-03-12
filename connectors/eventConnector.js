@@ -239,29 +239,46 @@ const renderEvents = (rows) => {
         } catch (_) {
             pic = "https://www.rocketmortgage.com/resources-cmsassets/RocketMortgage.com/Article_Images/Large_Images/TypesOfHomes/types-of-homes-hero.jpg";
         }
-        let result;
-        if (row.events_ammount >= row.events_goal) {
+
+        let red = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Disc_Plain_red.svg/1200px-Disc_Plain_red.svg.png";
+        let green = "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Location_dot_green.svg/1200px-Location_dot_green.svg.png";
+        let lock = "https://media.istockphoto.com/vectors/lock-icon-vector-id936681148?k=20&m=936681148&s=612x612&w=0&h=j6fxNWrJ09iE7khUsDWetKn_PwWydgIS0yFJBEonGow=";
+        let lock_open = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpjsRVbDnlRgY7OZit_raB67oD8QgxMIXGr3orbbrchJWAYahl9IF65as5H47kT8aQC5o&usqp=CAU";
+        let lockHelper = lock_open;
+        let target_src = red;
+        if (row.events_ammount >= row.events_goal) { // target reseved 
+            target_src = green;
 
         }
+        let currentDate = new Date();
+        let eventDate = new Date(row.events_date);
+        let donate = `   <label class="floatLabel" for="donateInput">donate here </label>
+                        <input class="fieldInput" style="background:none;border:2px solid $clr-gray300;width:25%;border-radius:$radius; padding:0.5rem; outline:none" name="donateInput" min=0 max=3000000 id="donateInput${row.events_id}" type="number"
+                            value="" required>
+
+                    <button class="eventsButton"  onclick="Donate(${row.events_id}); event.target.innerHTML='Donated'; event.target.style.backgroundColor='#7e7e7e'">Donate</button>`;
+        if (eventDate <= currentDate) { // time for event ended.
+            lockHelper = lock;
+            donate = ` <label class="floatLabel">You can not donate to the project - time is up </label>`;
+        }
+
+
 
         return `<div class="blocks">
                 <img alt=${alt} src=${pic} style="position: relative; width: 100%; height: auto; border-radius: .5rem;"/>
                 
                 <div class="eventboxdate">
                     <span class="eventDate">${row.events_date}</span><br/>
-                    
-                </div>
-                
+                </div >
+                    <img class="target" alt=${alt} src="${target_src}" style="position: relative; width: 10%; height: auto; border-radius: .5rem;"/>
+                    <img class="target" alt=${alt} src="${lockHelper}" style="position: relative; width: 10%; height: auto; border-radius: .5rem;"/>
+
                 <div class="eventboxinfo">
                     <h3>${row.events_title}</h3>
                     <span class="endTime">${row.events_end_time}</span><br/>
                     <span class="eventsGoal">Total ${row.events_ammount} </br>From ${row.events_goal}</span><br/>
                     <p class="eventsDesc">${row.events_desc}</p>
-                    <label class="floatLabel" for="donateInput">donate here </label>
-                        <input class="fieldInput" style="background:none;border:2px solid $clr-gray300;width:25%;border-radius:$radius; padding:0.5rem; outline:none" name="donateInput" min=0 max=3000000 id="donateInput${row.events_id}" type="number"
-                            value="" required>
-
-                    <button class="eventsButton"  onclick="Donate(${row.events_id}); event.target.innerHTML='Donated'; event.target.style.backgroundColor='#7e7e7e'">Donate</button>
+                    ${donate}
                 </div>
 
             </div>`
