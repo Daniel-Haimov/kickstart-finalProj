@@ -173,12 +173,13 @@ const fetchEventIdFromParticipation = () => {
     })
 }
 
+
+
 const renderAdminEvents = (rows) => {
     return rows.map(row =>
         `<tr><td><div class="leftRowPart">Title: ${row.events_title} <br> Date:   ${new Date(row.events_date).toString().split(" ").slice(1, 4).join(" ")} <br>End Time: ${row.events_end_time} </div>
         <div class=rightRowPart><button onclick="editEvent(${row.events_id})" class="adminEventEditButton">Edit</button>
-        <button onclick="deleteEvent(${row.events_id})" class="adminEventDeleteButton">Delete</button><div>
-        <button onclick="confirmEvent(${row.events_id})" class="adminEventDeleteButton">Finish</button><div></td></tr>`
+        <button onclick="deleteEvent(${row.events_id})" class="adminEventDeleteButton">Delete</button><div>`
     ).join("").replace(/\s\s+/g, " ");
 }
 
@@ -231,7 +232,18 @@ const finishEventById = (eventId) => {
 }
 
 const renderEvents = (rows) => {
-    return rows.map(row => {
+
+
+    var byDate = rows.slice(0);
+    byDate.sort(function (a, b) {
+        let adate = new Date(a.events_date);
+        let bdate = new Date(b.events_date);
+        if (adate <= bdate) {
+            return 1;
+        }
+        return -1;
+    });
+    return byDate.map(row => {
         let pic = row.events_img_src;
         let alt = "PROJECT";
         try {

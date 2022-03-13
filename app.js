@@ -13,11 +13,6 @@ app.use(session({
     activeDuration: 5 * 60 * 1000,
 }));
 
-// DB connectors
-// const eventConnector = require('./connectors/eventConnector.js');
-// const rewardsConnector = require('./connectors/rewardsConnector.js');
-
-
 hbs.registerPartials(__dirname + '/views/partials');
 hbs.registerPartial('style', '/views/partials/styles')
 hbs.registerPartial('navigation', '/views/partials/navigation')
@@ -49,20 +44,6 @@ app.use('/staff', sessionHelper.refreshCookie, sessionHelper.requireLogin, staff
 
 app.get('/', (request, response) => {
     response.redirect('/login');
-});
-
-
-app.get('/calendar', (request, response) => {
-    response.render('events_cal.hbs', {
-
-    });
-})
-
-app.get('/popup', (request, response) => {
-    response.render('popup.hbs', {
-        eventPicUrl: "https://i.ytimg.com/vi/EDzLx3hkli0/maxresdefault.jpg",
-
-    });
 });
 
 

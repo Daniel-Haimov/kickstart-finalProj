@@ -31,37 +31,7 @@ router.get('/events', async (request, response) => {
         response.render('staffEvents.hbs', err)
     }
 });
-/* receives eventId and returns participants [{stdId, stdName},...]*/
-router.get('/participants/:eventId', async (request, response) => {
-    try {
-        let participants = await eventConnector.fetchParticipationsByEventId(request.params.eventId)
-        response.json({ participants })
-    } catch (err) {
-        console.log(err);
-        response.render('staffEvents.hbs', { err })
-    }
-});
 
-router.get('/finish/:id', async (request, response) => {
-    try {
-        let eventId = request.params.id;
-        let event = await eventConnector.fetchEventById(eventId);
-        let point = event[0].events_points;
-        console.log(event);
-        let updatePointResult = await eventConnector.updateUsersPoint(point, eventId);
-        let confirmEventResult = await eventConnector.confirmParticipationByEventId(eventId);
-        let deleteParticipationResult = await eventConnector.deleteParticipationById(eventId);
-        let finishEventResult = await eventConnector.finishEventById(eventId);
-        let events = await eventConnector.fetchEvents();
-        response.render('staffEvents.hbs', {
-            events
-        });
-    }
-    catch (err) {
-        console.log(err);
-        response.render('staffEvents.hbs', err)
-    }
-})
 
 router.get('/events', (request, response) => {
     try {
@@ -136,6 +106,34 @@ router.post('/challenges/student', async (request, response) => {
         response.render('staffChallenges.hbs', {
             statusMsg: msg
         })
+    }
+})
+
+
+
+router.get('/edit/:id', async (request, response) => {
+    // validate request.params.id;
+    let event = await eventConnector.fetchEventById(request.params.id);
+    response.json({ event: event });
+
+})
+
+
+router.get('/delete/:id', async (request, response) => {
+    try {
+        // delete 
+        let deleteEventResult = await eventConnector.deleteEventById(request.params.id);
+        console.log(deleteEventResult);
+        let events = await eventConnector.fetchEvents();
+        let renderedAdminEvents = eventConnector.renderAdminEvents(events);
+        response.render('adminEvents.hbs', {
+            renderedAdminEvents
+        });
+    }
+
+    catch (err) {
+        console.log(err);
+        response.render('adminEvents.hbs', err)
     }
 })
 

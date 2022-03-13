@@ -22,20 +22,7 @@ router.get('/', async (request, response) => {
 
 });
 
-router.get('/finished', async (request, response) => {
-    try {
-        let events = await eventConnector.fetchFinishedEvents();
-        let renderedAdminEvents = eventConnector.renderAdminEvents(events);
-        response.render('adminEvents.hbs', {
-            renderedAdminEvents
-        });
-    }
-    catch (err) {
-        console.log(err);
-        response.render('adminEvents.hbs', err)
-    }
 
-});
 /* 
  *  handler for Admin events inputs  
  * takes inputs from forms to perform 
@@ -117,25 +104,6 @@ router.get('/delete/:id', async (request, response) => {
         });
     }
 
-    catch (err) {
-        console.log(err);
-        response.render('adminEvents.hbs', err)
-    }
-})
-
-router.get('/finish/:id', async (request, response) => {
-    try {
-        let eventId = request.params.id;
-        let event = await eventConnector.fetchEventById(eventId);
-        let point = event[0].events_points;
-        console.log(event[0]);
-        let finishEventResult = await eventConnector.finishEventById(eventId);
-        let events = await eventConnector.fetchEvents();
-        let renderedAdminEvents = eventConnector.renderAdminEvents(events);
-        response.render('adminEvents.hbs', {
-            renderedAdminEvents
-        });
-    }
     catch (err) {
         console.log(err);
         response.render('adminEvents.hbs', err)

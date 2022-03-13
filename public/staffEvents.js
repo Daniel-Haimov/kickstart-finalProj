@@ -5,7 +5,7 @@ let startTime = document.getElementById("startTimeInput");
 let endTime = document.getElementById("endTimeInput");
 let campus = document.getElementById("campusInput");
 let address = document.getElementById("location");
-let points = document.getElementById("pointsInput");
+let goal = document.getElementById("goalInput");
 let desc = document.getElementById("descriptionInput");
 let inputH2 = document.getElementById("inputH2");
 let idInput = document.getElementById("eventIdInput");
@@ -45,12 +45,10 @@ const editEvent = (id) => {
             idInput.value = event["events_id"];
             title.value = event["events_title"];
             date.value = event["events_date"].split("T")[0];
-            startTime.value = event["events_start_time"];
             endTime.value = event["events_end_time"];
-            campus.value = event["events_campus"];
-            address.value = event["events_locations"];
-            points.value = event["events_points"];
+            goal.value = event["events_goal"];
             desc.value = event["events_desc"];
+            imgInput.value = event["events_img_src"]
         })
         .catch(err => console.log(err));
 }
@@ -58,7 +56,7 @@ const editEvent = (id) => {
 const deleteEvent = (id) => {
     selectedEvent = id;
 
-    fetch(window.location.origin + "/staff/edit/" + id)
+    fetch(window.location.origin + "/staff/delete/" + id)
         .then(res => res.json())
         .then(res => {
             let event = res.event[0];
@@ -77,41 +75,6 @@ const deleteEvent = (id) => {
         })
 }
 
-const confirmEvent = (id) => {
-    selectedEvent = id;
-
-    fetch(window.location.origin + "/staff/edit/" + id)
-        .then(res => res.json())
-        .then(res => {
-            let event = res.event[0];
-            let participants = res.participants;
-            console.log("In confirmEvent() fetch result")
-            finishPopupTitle.innerHTML = event["events_title"];
-            finishPopupDate.innerHTML = event["events_date"].split("T")[0];
-            for (let participant of participants) {
-                let pli = document.createElement('li');
-                let studentId = document.createElement('span');
-                studentId.className = 'participantName';
-                let name = document.createElement('span');
-                name.className = 'participantName';
-                studentId.innerHTML = participant.studentId;
-                name.innerHTML = participant.studentName;
-                pli.appendChild(studentId);
-                pli.appendChild(name);
-                participantsList.appendChild(pli);
-            }
-            if (!participantsList.childElementCount) {
-                let msgli = document.createElement('li');
-                msgli.style.color = "red";
-                msgli.innerHTML = 'no participant';
-                participantsList.appendChild(msgli);
-            }
-            adminEventFinishPopupDiv.style.display = "block";
-            greyDiv.style.display = "block";
-
-        })
-}
-
 const closePopup = () => {
     PopupDiv.style.display = "none";
     adminEventFinishPopupDiv.style.display = "none";
@@ -125,6 +88,3 @@ const deleteConfirmed = () => {
     window.location.replace(window.location.origin + "/staff/delete/" + selectedEvent);
 }
 
-const finishConfirmed = () => {
-    window.location.replace(window.location.origin + "/staff/finish/" + selectedEvent);
-}
